@@ -3,12 +3,18 @@ const router = express.Router();
 
 const authController = require("../controllers/authController");
 
-// const { isAuth, isNotAuth } = require("../middleware/authMiddleware");
+const isAuth = require("../middleware/isAuth");
+const isNotAuth = require("../middleware/isNotAuth");
+
+// Root route
+router.get("/", (req, res) => {
+    res.redirect("/login");
+});
 
 // Routes
-router.get("/", authController.getLogin);
-router.get("/register", authController.getRegister);
-router.get("/dashboard", authController.getDashboard);
+router.get("/index", isAuth, authController.getDashboard);
+router.get("/login", isNotAuth, authController.getLogin);
+router.get("/register", isNotAuth, authController.getRegister);
 router.get("/logout", authController.logout);
 
 // Form handlers
