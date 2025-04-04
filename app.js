@@ -6,20 +6,20 @@ const path = require("path");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
-const goalRoutes = require("./routes/goalRoutes");
+// const goalRoutes = require("./routes/goalRoutes");
 
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware provided by express
+// Built-in middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// Dynamic localization
+// i18n Configuration
 i18n.configure({
     locales: ["en", "ru"],
     directory: path.join(__dirname, "locales"),
@@ -31,24 +31,26 @@ i18n.configure({
     objectNotation: true,
 });
 
-// Embedded JavaScript templeting engine
+// View Engine Setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// MongoDB (Atlas) connection
+// Database Connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to database!"))
-    .catch(err => console.error(err));
+    .catch(err => console.error("Database connection error:", err));
 
 mongoose.connection.on("error", (err) => {
-    console.error("Failed to connect to database", err);
+    console.error("Database connection error:", err);
 });
 
-// Routes for user authentication and goal creation
+// Routes
 app.use("/", authRoutes);
-app.use("/", goalRoutes);
+// app.use("/", goalRoutes);
 
-// Custom middleware
+// Global error handling
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Application is running on http:localhost:${port}`));
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
