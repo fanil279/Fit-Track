@@ -6,6 +6,7 @@ const createGoal = async (req, res) => {
         const { goalName, description } = req.body;
 
         const newGoal = await new Goal({ goalName, description, userId: req.user._id });
+        await newGoal.save();
 
         // Add goal reference to user's goals array
         await User.findByIdAndUpdate(req.user._id,
