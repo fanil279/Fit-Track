@@ -11,7 +11,7 @@ const getRegister = (req, res) => {
 }
 
 const getDashboard = (req, res) => {
-    res.render("index", {user: req.user});
+    res.render("dashboard", {user: req.user});
 }
 
 const logout = (req, res) => {
@@ -38,7 +38,7 @@ const login = async (req, res) => {
         const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
         res.cookie("token", token, { httpOnly: true, sameSite: "strict", maxAge: 3600000});
 
-        return res.redirect("/index");
+        return res.redirect("/dashboard");
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: "An error occurred. Please try again later" });
@@ -62,7 +62,7 @@ const register = async (req, res) => {
         const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
         res.cookie("token", token, {httpOnly: true });
 
-        return res.redirect("/index");
+        return res.redirect("/dashboard");
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: "An error occurred. Please try again later" });

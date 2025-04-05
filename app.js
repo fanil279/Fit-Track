@@ -6,14 +6,14 @@ const path = require("path");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
-// const goalRoutes = require("./routes/goalRoutes");
+const goalRoutes = require("./routes/goalRoutes");
 
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Built-in middleware
+// Built-in Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -46,9 +46,14 @@ mongoose.connection.on("error", (err) => {
 
 // Routes
 app.use("/", authRoutes);
-// app.use("/", goalRoutes);
+app.use("/", goalRoutes);
 
-// Global error handling custom middleware
+// Not Found Page
+app.use((req, res) => {
+    res.status(404).render("404");
+});
+
+// Custom Middleware. Global Error Handling
 app.use(errorHandler);
 
 app.listen(port, () => {console.log(`Server running on http://localhost:${port}`)});

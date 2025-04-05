@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    position: relative;
+}
+
+footer > p {
+    margin-top: 0.8em;
+}

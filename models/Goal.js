@@ -7,11 +7,13 @@ const goalSchema = new mongoose.Schema({
         required: [true, "Goal name is required!"],
         unique: true,
     },
+
     description: {
         type: String,
         minLength: [10, "Description should, at least, consist of 10 characters!"],
         required: [true, "Description is required!"],
     },
+    
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

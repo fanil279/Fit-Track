@@ -6,7 +6,7 @@ const isNotAuth = (req, res, next) => {
     if (token) {
         jwt.verify(token, process.env.JWT_SECRET, (err) => {
             if (!err) {
-                res.redirect("/index");
+                res.redirect("/dashboard");
             } else {
                 next();
             }
