@@ -19,7 +19,7 @@ const goalSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-});
+}, { timestamps: true });
 
 const Goal = mongoose.model("Goal", goalSchema);
 

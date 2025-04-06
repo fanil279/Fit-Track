@@ -13,8 +13,7 @@
         <a class="navbar-brand" href="#">FitTrack</a>
         <div class="collapse navbar-collapse justify-content-center">
           <div class="d-flex ms-auto">
-            <a type="button" class="btn btn-outline-light me-2" href="/register">Register</a>
-            <a type="button" class="btn btn-outline-light" href="/login">Login</a>
+            <a type="button" class="btn btn-outline-light me-4" href="/logout" class="btn btn-secondary">Logout</a>
           </div>
         </div>
     </nav>
@@ -33,7 +32,6 @@
         <div class="row justify-content-center align-items-center">
             <div class="col text-center">
                 <p class="text-center fw-bold text-primary fs-4">Welcome, <%= user.username %>!</p>
-                <a type="button" href="/logout" class="btn btn-secondary">Logout</a>
             </div>
         </div>
 
@@ -42,35 +40,36 @@
         <h2 class="mt-5 mb-5">Fitness Goal Tracker</h2>
         <!-- Form for Creating Goals -->
         <div class="input-group mb-5">
-            <form id="formCreate" action="/dashboard/create-goal" method="POST">
-                <input type="text" name="goalName" class="form-control" placeholder="Enter goal name" aria-label="Goal Name" required style="width: 30vw;">
-                <textarea name="description" class="form-control" placeholder="Enter goal description..." rows="3" required style="width: 30vw;"></textarea>
+            <form id="formCreate" onsubmit="createNew(event)" action="/dashboard/create-goal" method="POST">
+                <input id="createInput" type="text" name="goalName" class="form-control mb-1" placeholder="Enter goal name" aria-label="Goal Name" required style="width: 30vw;">
+                <textarea id="textarea" name="description" class="form-control" placeholder="Enter goal description..." rows="3" required style="width: 30vw;"></textarea>
                 
-                <div class="d-flex gap-2 mt-3 mb-3">
-                    <button class="btn btn-success" type="submit" id="createGoalBtn" onclick="createNew()">Create New Goal</button>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success mt-3" type="submit" id="createGoalBtn">Create New Goal</button>
                 </div>
-            </form>
+            </form>            
         </div>
 
 
         <!-- Update, Delete and Read Forms-->
         <div class="input-group mb-5">
-            <form id="formUpdate" action="/dashboard/update-goal" method="PUT">
-                <input type="text" name="updateGoalName" id="updateGoalName" class="form-control" placeholder="Update Goal by Name" style="width: 25vw;">
-                <textarea name="descriptionUpdate" class="form-control" placeholder="Update goal description..." rows="3" required style="width: 30vw;"></textarea>
-                <button class="btn btn-warning mt-3" type="button" id="updateGoalBtn" onclick="updateByGoalName()">Update Goal</button>
+            <form id="formUpdate" onsubmit="updateByGoalName(event)" action="/dashboard/update-goal" method="PUT">
+                <input type="text" name="updateGoalByName" id="updateGoalName" class="form-control mb-1" placeholder="Goal Nane to Update" style="width: 25vw;">
+                <input type="text" name="updatedGoalName" id="updatedGoalName" class="form-control mb-1" placeholder="Updated Goal by Name" style="width: 25vw;">
+                <textarea id="textareaUpdate" name="descriptionUpdate" class="form-control" placeholder="Updated goal description..." rows="3" required style="width: 30vw;"></textarea>
+                <button class="btn btn-warning mt-3" type="submit" id="updateGoalBtn">Update Goal</button>
             </form>
         </div>
 
         <div class="input-group mb-5">
-            <form id="formDelete" action="/dashboard/delete-goal" method="DELETE">
-                <input type="text" name="deleteGoalName" id="deleteGoalName" class="form-control" placeholder="Delete Goal by Name" style="width: 25vw;">
-                <button class="btn btn-danger mt-3" type="button" id="deleteGoalBtn" onclick="deleteByGoalName()">Delete Goal</button>
+            <form id="formDelete" onsubmit="deleteByGoalName(event)" action="/dashboard/delete-goal" method="DELETE">
+                <input type="text" name="deleteGoalName" id="deleteGoalName" class="form-control mb-1" placeholder="Delete Goal by Name" style="width: 25vw;">
+                <button class="btn btn-danger mt-3" type="submit" id="deleteGoalBtn">Delete Goal</button>
             </form>
         </div>
 
-        <div class="d-flex gap-2 mt-5">
-            <button class="btn btn-primary" type="button" id="showGoalsBtn" onclick="getAll()">Show Goals</button>
+        <div class="input-group mb-5">
+                <button class="btn btn-primary" type="button" id="showGoalsBtn" onclick="getAll()">Show Goals</button>
         </div>
 
 
