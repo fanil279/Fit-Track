@@ -8,7 +8,7 @@ async function createNew(event) {
         const input = inputEl.value;
         const textarea = textareaEl.value;
 
-        const url = "http://localhost:5000";
+        const url = "https://00018993-production.up.railway.app";
 
         const response = await fetch(`${url}/dashboard/create-goal`, {
             method: "POST",

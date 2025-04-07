@@ -13,7 +13,7 @@ const i18nHandler = require("./middleware/i18n");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // Built-in Middleware
 app.use(express.json());
