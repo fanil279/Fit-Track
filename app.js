@@ -61,4 +61,4 @@ app.use((req, res) => {
 
 app.use(errorHandler); // Custom Middleware. Global Error Handling
 
-app.listen(port, () => {console.log(`Server running on http://localhost:${port}`)});
+app.listen(port, () => {console.log(`Server running on ${port}`)});
