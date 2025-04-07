@@ -44,7 +44,6 @@ let areGoalsVisible = false;
 async function getAll() {
     try {
         const ul = document.getElementById("ul");
-        const btn = document.getElementById("showGoalsBtn");
         const url = "http://localhost:5000";
 
         const response = await fetch(`${url}/dashboard/read-goals`, {
@@ -157,6 +156,34 @@ async function deleteByGoalName(event) {
         document.getElementById("deleteGoalName").value = "";
 
         getAll();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+let goalsVisible = true
+function Search(event) {
+    event.preventDefault();
+
+    try {
+        if (goalsVisible) {
+            const input = document.getElementById("search");
+            const ul = document.getElementById("ul");
+    
+            const search = input.value.toLocaleLowerCase().trim();
+            const listItems = ul.getElementsByTagName("li");
+    
+            for (let i = 0; i < listItems.length; i++) {
+                const li = listItems[i];
+                const text = li.textContent.toLocaleLowerCase().trim();
+    
+                if (text.startsWith(search)) {
+                    li.style.display = "";
+                } else {
+                    li.style.display = "none";
+                }
+            }
+        }
     } catch (error) {
         console.error(error);
     }

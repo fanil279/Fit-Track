@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { validationResult } = require("express-validator");
 const User = require("../models/User");
 
 const getLogin = (req, res) => {
@@ -7,7 +8,7 @@ const getLogin = (req, res) => {
 }
 
 const getRegister = (req, res) => {
-    res.render("register");
+    res.render("register", { errors: [] });
 }
 
 const getDashboard = (req, res) => {
@@ -21,12 +22,15 @@ const logout = (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { username, password} = req.body;
+        let { username, password} = req.body;
+
+        username = username.trim();
+        password = password.trim();
 
         let user = await User.findOne({ username });
 
         if (!user) {
-            return res.status(400).send('Invalid credentials. <a href="/login">Try again</a>');
+            return res.status(400).render("400");
         }
 
         let passwordMatches = await bcrypt.compare(password, user.password);
@@ -46,8 +50,19 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render("register", {
+            errors: errors.array(),
+        });
+    }
+
     try {
-        const { username, password} = req.body;
+        let { username, password} = req.body;
+
+        username = username.trim();
+        password = password.trim();
 
         let usernameExists = await User.findOne({ username });
 

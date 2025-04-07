@@ -7,7 +7,9 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const goalRoutes = require("./routes/goalRoutes");
+const localesRouter = require("./routes/localesRoutes");
 
+const i18nHandler = require("./middleware/i18n");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -31,6 +33,9 @@ i18n.configure({
     objectNotation: true,
 });
 
+app.use(i18n.init); // Initialization i18n Middleware
+app.use(i18nHandler); // Custom Middleware. i18n Handling
+
 // View Engine Setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -45,6 +50,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 // Routes
+app.use("/", localesRouter);
 app.use("/", authRoutes);
 app.use("/", goalRoutes);
 
@@ -53,7 +59,6 @@ app.use((req, res) => {
     res.status(404).render("404");
 });
 
-// Custom Middleware. Global Error Handling
-app.use(errorHandler);
+app.use(errorHandler); // Custom Middleware. Global Error Handling
 
 app.listen(port, () => {console.log(`Server running on http://localhost:${port}`)});

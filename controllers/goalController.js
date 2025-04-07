@@ -6,6 +6,9 @@ const createGoal = async (req, res) => {
         const { goalName, description } = req.body;
         const username = req.user.username;  // Extract username from decoded JWT
 
+        goalName = goalName.trim();
+        description = description.trim();
+
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -53,8 +56,10 @@ const updateGoal = async (req, res) => {
         const user = await User.findOne({ username });
         const userId = user._id;
 
-        const { updateGoalByName } = req.body;
-        const { updatedGoalName, descriptionUpdate } = req.body;
+        const { updateGoalByName, updatedGoalName, descriptionUpdate } = req.body;
+
+        updatedGoalName = updatedGoalName.trim();
+        descriptionUpdate = descriptionUpdate.trim();
 
         if (!updatedGoalName || !descriptionUpdate) {
             return res.status(400).json({ error: "Missing required fields" });

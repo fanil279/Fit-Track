@@ -3,22 +3,22 @@
         <div class="col-md-6">
             <div class="card shadow-lg">
                 <div class="card-header text-center">
-                    <h2 class="text-primary">Login</h2>
+                    <h2 class="text-primary"><%= t('login') %></h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="/login">
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label"><%= t('username') %></label>
                             <input type="text" name="username" id="username" class="form-control" required />
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label"><%= t('password') %></label>
                             <input type="password" name="password" id="password" class="form-control" required />
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                        <button type="submit" class="btn btn-primary w-100"><%= t('login') %></button>
                     </form>
                 </div>
             </div>
