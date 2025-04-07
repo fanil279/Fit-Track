@@ -57,7 +57,7 @@
         <!-- Update, Delete and Read Forms-->
         <div class="input-group mb-5">
             <form id="formUpdate" onsubmit="updateByGoalName(event)" action="/dashboard/update-goal" method="PUT">
-                <input type="text" name="updateGoalByName" id="updateGoalByName" class="form-control mb-1" placeholder="<%= t('goal_name_to_update') %>" style="width: 100%; max-width: 100%; min-width: 100%;">
+                <input type="text" name="updateGoalByName" id="updateGoalByName" class="form-control mb-1" placeholder="<%= t('goal_name_to_update') %>" style="width: auto; max-width: 100%; min-width: 100%;">
                 <input type="text" name="updatedGoalName" id="updatedGoalName" class="form-control mb-1" placeholder="<%= t('updated_goal_name') %>" style="width: 100%; max-width: 100%; min-width: 100%;">
                 <textarea id="textareaUpdate" name="descriptionUpdate" class="form-control" placeholder="<%= t('updated_goal_description') %>" rows="3" required style="width: 100%; max-width: 100%; min-width: 250px;"></textarea>
                 <button class="btn btn-warning mt-3" type="submit" id="updateGoalBtn"><%= t('update_goal') %></button>
