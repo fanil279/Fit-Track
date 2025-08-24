@@ -1,9 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const i18n = require("i18n");
 const cookieParser = require("cookie-parser");
 const path = require("path");
-require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const goalRoutes = require("./routes/goalRoutes");
@@ -61,4 +61,4 @@ app.use((req, res) => {
 
 app.use(errorHandler); // Custom Middleware. Global Error Handling
 
-app.listen(port, () => {console.log(`Server running on ${port}`)});
+app.listen(port, () => {console.log(`Server is running at ${process.env.BASE_URL}`)});

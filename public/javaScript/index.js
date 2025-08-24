@@ -8,7 +8,7 @@ async function createNew(event) {
         const input = inputEl.value;
         const textarea = textareaEl.value;
 
-        const url = "https://00018993-production.up.railway.app";
+        const url = "http://localhost:5000";
 
         const response = await fetch(`${url}/dashboard/create-goal`, {
             method: "POST",
@@ -44,8 +44,7 @@ let areGoalsVisible = false;
 async function getAll() {
     try {
         const ul = document.getElementById("ul");
-        const url = "https://00018993-production.up.railway.app";
-
+        const url = "http://localhost:5000";
         const response = await fetch(`${url}/dashboard/read-goals`, {
             credentials: "include",
         });
@@ -94,8 +93,7 @@ async function updateByGoalName(event) {
         const updatedGoalName = document.getElementById("updatedGoalName").value;
         const descriptionUpdate = document.getElementById("textareaUpdate").value;
 
-        const url = "https://00018993-production.up.railway.app";
-
+        const url = "http://localhost:5000";
         const response = await fetch(`${url}/dashboard/update-goal`, {
             method: "PUT",
             headers: {
@@ -133,8 +131,7 @@ async function deleteByGoalName(event) {
 
     try {
         const deleteGoalByName = document.getElementById("deleteGoalName").value;
-        const url = "https://00018993-production.up.railway.app";
-
+        const url = "http://localhost:5000";
         const response = await fetch(`${url}/dashboard/delete-goal`, {
             method: "DELETE",
             headers: {

@@ -44,7 +44,7 @@ Here is a list of the main dependencies used in the app:
 
 
 ## Links
-- [GitHub Repository](https://github.com/fanil279/Fit-Tracker).
+- [GitHub Repository](https://github.com/fanil279/Fit-Track).
 
 
 

@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const createGoal = async (req, res) => {
     try {
-        const { goalName, description } = req.body;
+        let { goalName, description } = req.body;
         const username = req.user.username;  // Extract username from decoded JWT
 
         goalName = goalName.trim();
@@ -56,7 +56,7 @@ const updateGoal = async (req, res) => {
         const user = await User.findOne({ username });
         const userId = user._id;
 
-        const { updateGoalByName, updatedGoalName, descriptionUpdate } = req.body;
+        let { updateGoalByName, updatedGoalName, descriptionUpdate } = req.body;
 
         updatedGoalName = updatedGoalName.trim();
         descriptionUpdate = descriptionUpdate.trim();
@@ -97,7 +97,7 @@ const deleteGoal = async (req, res) => {
         }
 
         // Delete goal reference to user's goals array
-        await User.findByIdAndDelete(userId, {
+        await User.findByIdAndUpdate(userId, {
             $pull: { goals: deletedGoal._id }
         });
 
