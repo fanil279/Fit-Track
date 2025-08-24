@@ -44,8 +44,7 @@ Here is a list of the main dependencies used in the app:
 
 
 ## Links
-- [GitHub Repository](https://github.com/fanil279/00018993.git).
-- [Hosted App](https://00018993-production.up.railway.app).
+- [GitHub Repository](https://github.com/fanil279/Fit-Tracker).
 
 
 
